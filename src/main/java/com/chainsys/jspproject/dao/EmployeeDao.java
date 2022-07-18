@@ -114,8 +114,6 @@ public class EmployeeDao
 			ps.setDate(4, convertTosqlDate(newemp.getHire_date()));
 			ps.setString(5, newemp.getJob_id());
 			ps.setFloat(6, newemp.getSalary());
-
-			ps.executeUpdate();
 			rows = ps.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -153,7 +151,6 @@ public class EmployeeDao
 			ps = con.prepareStatement(updatequery);
 			ps.setString(1, fname);
 			ps.setInt(2, id);
-			ps.executeUpdate();
 			rows = ps.executeUpdate();
 		} catch (SQLException e) 
 		{
@@ -190,7 +187,6 @@ public class EmployeeDao
 			ps = con.prepareStatement(updatequery);
 			ps.setDouble(1, salary );
 			ps.setInt(2, id);
-			ps.executeUpdate();
 			rows = ps.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -225,7 +221,6 @@ public class EmployeeDao
 			con = getConnection();
 			ps = con.prepareStatement(deletequery);
 			ps.setInt(1, id);
-			ps.executeUpdate();
 			rows = ps.executeUpdate();	
 		}catch(SQLException e) 
 		{

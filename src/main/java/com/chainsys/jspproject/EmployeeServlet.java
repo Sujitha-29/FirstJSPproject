@@ -67,7 +67,6 @@ public class EmployeeServlet extends HttpServlet
 			
 			PrintWriter out = response.getWriter();
 			Employee newemp = null;
-			int result = 0;
 			int empId = 0;
 			String testname = null;
 			try {
@@ -185,7 +184,7 @@ public class EmployeeServlet extends HttpServlet
 				}
 				newemp.setSalary(salParse);
 //----------------------------------------------			
-				result = EmployeeDao.insertEmployee(newemp);
+//				result = EmployeeDao.insertEmployee(newemp);
 			} catch (Exception e) 
 			{
 				message +="Error in Last name input</p>";
@@ -193,7 +192,10 @@ public class EmployeeServlet extends HttpServlet
                 out.print(errorPage);
                 return;
 			}
-			out.println("<div> Add New Employee: " + result + "</div>");
+		    int result = EmployeeDao.insertEmployee(newemp);
+            request.setAttribute("addemp", result);
+            RequestDispatcher rd = request.getRequestDispatcher("/insertemployee.jsp");
+            rd.forward(request, response);
 		} else if (request.getParameter("click").equals("UPDATE_EMP")) {
 			doPut(request, response);
 		} else if (request.getParameter("click").equals("DELETE_EMP")) {
@@ -330,14 +332,17 @@ public class EmployeeServlet extends HttpServlet
 			}
 			newemp.setSalary(salParse);
 //----------------------------------------------			
-			result = EmployeeDao.updateEmployee(newemp);
+			//result = EmployeeDao.updateEmployee(newemp);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		} finally {
 		}
-		out.println("<div> Updated Employee detail: " + result + "</div>");
-	}
+		result = EmployeeDao.updateEmployee(newemp);
+        request.setAttribute("updateemp", result);
+        RequestDispatcher rd = request.getRequestDispatcher("/updateemployee.jsp");
+        rd.forward(request, response);
+    }
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException 
@@ -368,6 +373,8 @@ public class EmployeeServlet extends HttpServlet
 		}
 	    newemp.setEmp_id(emp_id);
 		int result = EmployeeDao.deleteEmployee(emp_id);
-		out.println(result + "row deleted");
+        request.setAttribute("delemp", result);
+        RequestDispatcher rd = request.getRequestDispatcher("/deleteemployee.jsp");
+        rd.forward(request, response);
 	}
 }
