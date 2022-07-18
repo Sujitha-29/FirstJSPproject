@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,7 @@ import com.chainsys.jspproject.pojo.Employee;
  * Servlet implementation class Employees
  */
 @WebServlet("/Employees")
-public class Employees extends HttpServlet 
+public class EmployeeServlet extends HttpServlet 
 {
 	String source="AddNewEmployee";
 	String message="<h1>Error while "+source+"</h1>";
@@ -34,7 +35,7 @@ public class Employees extends HttpServlet
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Employees()
+	public EmployeeServlet()
 	{
 		super();
 	}
@@ -47,14 +48,10 @@ public class Employees extends HttpServlet
 			throws ServletException, IOException 
 	{
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		PrintWriter out = response.getWriter();
-		List<Employee> emplist = EmployeeDao.getAllEmployee();
-		Iterator<Employee> empItr = emplist.iterator();
-		while (empItr.hasNext()) {
-			Employee emp = empItr.next();
-			out.println("</hr>");
-			out.println("emp id:"+ emp.getEmp_id() + "Fname:"+emp.getFirst_name()+"Lname:"+emp.getLast_name()+"Email:"+emp.getEmail()+"Hdate"+emp.getHire_date()+"Jobid:"+emp.getEmp_id()+"Salary"+emp.getSalary()+"</p>");
-		}
+		List<Employee> allEmployee = EmployeeDao.getAllEmployee();
+		request.setAttribute("emplist", allEmployee);
+		RequestDispatcher rd = request.getRequestDispatcher("/viewemp.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

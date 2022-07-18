@@ -9,6 +9,8 @@
 <body>
 <h1> welcome to JSP</h1>
 <div>
+<a href="viewemp.jsp">Get all Employee</a> </div>
+<div>
 <a href="addemp.jsp">Add New Employee</a> </div>
 <div> 
 <a href="updateemp.jsp">Update  Employee</a></div>
