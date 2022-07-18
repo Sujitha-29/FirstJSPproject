@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="Employees" method="post"> <!--need to mention method = post  -->
+<form action="deleteemployee.jsp" method="post"> <!--need to mention method = post  -->
         <center>
             <div>
             ID : <input type='text' name='id'>

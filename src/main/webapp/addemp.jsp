@@ -7,7 +7,7 @@
 <title>Add new Emp</title>
 </head>
 <body>
-<form action="Employees" method="post"> <!--need to mention method = post  -->
+<form action="insertemployee.jsp" method="post"> <!--need to mention method = post  -->
         <center>
             <div>
             ID : <input type='text' name='id'>
